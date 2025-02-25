@@ -1,0 +1,123 @@
+#include <iostream>
+#include <cctype>
+#include <string>
+using namespace std;
+
+/*
+TikTakToe
+
+Project flow:
+User prompted to enter either 'X' or 'O'
+The user is then assigned either the 'X' or 'O'
+User is asked to enter a cordinate in the 3d array
+The answer is recorded and printed to the terminal.
+If a spot is taken, then it cannot be overwriten and then player will be asked to 
+make another selection. 
+Each iteration the program will check if 
+
+Handling a win, if three X or O in a row, then the program declares
+a winner and program ends. 
+
+Variables needed:
+Player1
+Player2
+array
+
+Functions:
+Selection
+Print_Array
+Array
+
+*/
+
+void print_array(char arr[3][3], int row);
+void player1_move(int &row, int &col);
+char update_game();
+char player1();
+void is_winner(char arr[3][3], int row, bool &winner);
+
+int main(){
+    int row = 0;
+    int col = 0;
+    char choice = 'x';
+    bool winner = false;
+    char array[3][3] = {
+        {'1','2','3'},
+        {'2','5','6'},
+        {'7','8','9'}        
+       };
+    
+    while (winner == false){
+    is_winner(array, 3, winner);    
+    print_array(array,3);
+    player1_move(row, col);
+    array[row][col] = choice;
+    cout << winner << endl;
+    }
+
+    return 0;
+}
+
+void is_winner(char arr[3][3], int row, bool &winner){
+    for(int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+            if (arr[0][0] =='x' && arr[0][1] == 'x' && arr[0][2] == 'x'){  //handles row
+                winner = true;
+            }
+            else if (arr[1][0] =='x' && arr[1][1] == 'x' && arr[1][2] == 'x'){ //handles row
+                winner = true;
+            }
+            else if (arr[2][0] =='x' && arr[2][1] == 'x' && arr[2][2] == 'x'){  //handles row
+                winner = true;
+            }
+            else if (arr[0][0] =='x' && arr[1][0] == 'x' && arr[2][0] == 'x'){  //handles col
+                winner = true;
+            }
+            else if (arr[0][1] =='x' && arr[1][1] == 'x' && arr[2][1] == 'x'){ //handles col
+                winner = true;
+            }
+            else if (arr[0][2] =='x' && arr[1][2] == 'x' && arr[2][2] == 'x'){ //handles col
+                winner = true;
+            }
+            else if (arr[0][0] =='x' && arr[1][1] == 'x' && arr[2][2] == 'x'){ //handles vert
+                winner = true;
+            }
+            else if (arr[0][2] =='x' && arr[1][1] == 'x' && arr[2][0] == 'x'){ //handles vert
+                winner = true;
+            }
+            else{
+                winner = false;
+            }
+        }      
+    }   
+}
+
+void print_array(char arr[3][3], int row){   
+    for(int i=0; i<3; i++){
+        for (int j=0; j<3; j++){
+            cout << arr[i][j];
+        }
+        cout << endl;
+    }
+}
+
+char player1(){
+    char choice;
+    cout << "Choose either x or o ";
+    cin >> choice;
+    
+    while (choice != 'x' && choice != 'o'){
+        cout << "Enter either x or o: ";
+        cin >> choice;
+    }
+
+    return choice;
+}
+
+void player1_move(int &row, int &col){
+    cout << "Choose a row between 0 and 2: ";
+    cin >> row;
+    cout << endl;
+    cout << "Choose a column 0 and 2: ";
+    cin >> col;
+}
