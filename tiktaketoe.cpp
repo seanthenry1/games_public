@@ -30,25 +30,25 @@ Array
 
 */
 
-void print_array(char arr[3][3], int row);
+void print_array(string arr[3][3], int row);
 void player1_move(int &row, int &col);
-char update_game();
-char player1();
-void is_winner(char arr[3][3], int row, bool &winner);
+string update_game();
+string player1();
+void is_winner(string arr[3][3], int row, bool &winner);
 
 int main(){
     int row = 0;
     int col = 0;
-    char choice = 'x';
+    string choice = "x";
     bool winner = false;
-    char array[3][3] = {
-        {'1','2','3'},
-        {'2','5','6'},
-        {'7','8','9'}        
+    string array[3][3] = {
+        {"[0,0] ","[0,1] ","[0,2]"},
+        {"[1,0] ","[1,1] ","[1,2]"},
+        {"[2,0] ","[2,1] ","[2,2]"}        
        };
     
     while (winner == false){
-    is_winner(array, 3, winner);    
+   // is_winner(array, 3, winner);    
     print_array(array,3);
     player1_move(row, col);
     array[row][col] = choice;
@@ -58,31 +58,31 @@ int main(){
     return 0;
 }
 
-void is_winner(char arr[3][3], int row, bool &winner){
+void is_winner(string arr[3][3], int row, bool &winner){
     for(int i=0; i<3; i++){
         for (int j=0; j<3; j++){
-            if (arr[0][0] =='x' && arr[0][1] == 'x' && arr[0][2] == 'x'){  //handles row
+            if (arr[0][0] == "x" && arr[0][1] == "x" && arr[0][2] == "x"){  //handles row
                 winner = true;
             }
-            else if (arr[1][0] =='x' && arr[1][1] == 'x' && arr[1][2] == 'x'){ //handles row
+            else if (arr[1][0] == "x" && arr[1][1] == "x" && arr[1][2] == "x"){ //handles row
                 winner = true;
             }
-            else if (arr[2][0] =='x' && arr[2][1] == 'x' && arr[2][2] == 'x'){  //handles row
+            else if (arr[2][0] == "x" && arr[2][1] == "x" && arr[2][2] == "x"){  //handles row
                 winner = true;
             }
-            else if (arr[0][0] =='x' && arr[1][0] == 'x' && arr[2][0] == 'x'){  //handles col
+            else if (arr[0][0] == "x" && arr[1][0] == "x" && arr[2][0] == "x"){  //handles col
                 winner = true;
             }
-            else if (arr[0][1] =='x' && arr[1][1] == 'x' && arr[2][1] == 'x'){ //handles col
+            else if (arr[0][1] == "x" && arr[1][1] == "x" && arr[2][1] == "x"){ //handles col
                 winner = true;
             }
-            else if (arr[0][2] =='x' && arr[1][2] == 'x' && arr[2][2] == 'x'){ //handles col
+            else if (arr[0][2] == "x" && arr[1][2] == "x" && arr[2][2] == "x"){ //handles col
                 winner = true;
             }
-            else if (arr[0][0] =='x' && arr[1][1] == 'x' && arr[2][2] == 'x'){ //handles vert
+            else if (arr[0][0] == "x" && arr[1][1] == "x" && arr[2][2] == "x"){ //handles vert
                 winner = true;
             }
-            else if (arr[0][2] =='x' && arr[1][1] == 'x' && arr[2][0] == 'x'){ //handles vert
+            else if (arr[0][2] == "x" && arr[1][1] == "x" && arr[2][0] == "x"){ //handles vert
                 winner = true;
             }
             else{
@@ -92,7 +92,7 @@ void is_winner(char arr[3][3], int row, bool &winner){
     }   
 }
 
-void print_array(char arr[3][3], int row){   
+void print_array(string arr[3][3], int row){   
     for(int i=0; i<3; i++){
         for (int j=0; j<3; j++){
             cout << arr[i][j];
@@ -101,16 +101,17 @@ void print_array(char arr[3][3], int row){
     }
 }
 
-char player1(){
-    char choice;
+
+string player1(){
+    string choice;
     cout << "Choose either x or o ";
     cin >> choice;
-    
-    while (choice != 'x' && choice != 'o'){
+    /*
+    while (choice != "x" && choice != "o"){
         cout << "Enter either x or o: ";
         cin >> choice;
     }
-
+    */
     return choice;
 }
 
