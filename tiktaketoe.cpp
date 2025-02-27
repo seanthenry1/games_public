@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cctype>
 #include <string>
+#include <ctime>
+#include <random>
 using namespace std;
 
 /*
@@ -31,29 +33,30 @@ Array
 */
 
 void print_array(string arr[3][3], int row);
-void player1_move(int &row, int &col);
+void player1_move(int &row1, int &col1);
+void player2_move(int &row2, int &col2);
 string update_game();
 string player1();
 void is_winner(string arr[3][3], int row, bool &winner);
 
 int main(){
-    int row = 0;
-    int col = 0;
+    int row1 = 0;
+    int col1 = 0;
     string choice = "x";
     bool winner = false;
     string array[3][3] = {
-        {"[0,0] ","[0,1] ","[0,2]"},
-        {"[1,0] ","[1,1] ","[1,2]"},
-        {"[2,0] ","[2,1] ","[2,2]"}        
+        {"-","-","-"},
+        {"-","-","-"},
+        {"-","-","-"}        
        };
-    
-    while (winner == false){
-   // is_winner(array, 3, winner);    
+
     print_array(array,3);
-    player1_move(row, col);
-    array[row][col] = choice;
-    cout << winner << endl;
-    }
+    while (winner == false) {  
+    player1_move(row1, col1);
+    array[row1][col1] = choice; 
+    is_winner(array, 3, winner); 
+    print_array(array,3);
+    };
 
     return 0;
 }
@@ -63,27 +66,35 @@ void is_winner(string arr[3][3], int row, bool &winner){
         for (int j=0; j<3; j++){
             if (arr[0][0] == "x" && arr[0][1] == "x" && arr[0][2] == "x"){  //handles row
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[1][0] == "x" && arr[1][1] == "x" && arr[1][2] == "x"){ //handles row
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[2][0] == "x" && arr[2][1] == "x" && arr[2][2] == "x"){  //handles row
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[0][0] == "x" && arr[1][0] == "x" && arr[2][0] == "x"){  //handles col
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[0][1] == "x" && arr[1][1] == "x" && arr[2][1] == "x"){ //handles col
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[0][2] == "x" && arr[1][2] == "x" && arr[2][2] == "x"){ //handles col
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[0][0] == "x" && arr[1][1] == "x" && arr[2][2] == "x"){ //handles vert
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else if (arr[0][2] == "x" && arr[1][1] == "x" && arr[2][0] == "x"){ //handles vert
                 winner = true;
+                cout << "Player 1 Wins!\n"; 
             }
             else{
                 winner = false;
@@ -106,19 +117,31 @@ string player1(){
     string choice;
     cout << "Choose either x or o ";
     cin >> choice;
-    /*
+    
     while (choice != "x" && choice != "o"){
         cout << "Enter either x or o: ";
         cin >> choice;
     }
-    */
+    
     return choice;
 }
 
 void player1_move(int &row, int &col){
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
+
+    while (row != 0 && row != 1 && row !=2){
+        cout << "Enter either a 0 or 2";
+        cin >> row;
+    }
+
     cout << endl;
     cout << "Choose a column 0 and 2: ";
     cin >> col;
+
+    while (col != 0 && col != 1 && col !=2){
+        cout << "Enter either a 0 or 2";
+        cin >> col;
+    }
+
 }
