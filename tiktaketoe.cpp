@@ -3,6 +3,7 @@
 #include <string>
 #include <ctime>
 #include <random>
+#include <cstdlib>
 using namespace std;
 
 /*
@@ -37,11 +38,13 @@ void player1_move(int &row1, int &col1);
 void player2_move(int &row2, int &col2);
 string update_game();
 string player1();
-void is_winner(string arr[3][3], int row, bool &winner);
+void is_winner1(string arr[3][3], int row, bool &winner);
 
 int main(){
     int row1 = 0;
     int col1 = 0;
+    int row2 = 0;
+    int row2 = 0;
     string choice = "x";
     bool winner = false;
     string array[3][3] = {
@@ -54,14 +57,14 @@ int main(){
     while (winner == false) {  
     player1_move(row1, col1);
     array[row1][col1] = choice; 
-    is_winner(array, 3, winner); 
+    is_winner1(array, 3, winner); 
     print_array(array,3);
     };
 
     return 0;
 }
 
-void is_winner(string arr[3][3], int row, bool &winner){
+void is_winner1(string arr[3][3], int row, bool &winner){
     for(int i=0; i<3; i++){
         for (int j=0; j<3; j++){
             if (arr[0][0] == "x" && arr[0][1] == "x" && arr[0][2] == "x"){  //handles row
@@ -127,6 +130,7 @@ string player1(){
 }
 
 void player1_move(int &row, int &col){
+
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
 
@@ -144,4 +148,18 @@ void player1_move(int &row, int &col){
         cin >> col;
     }
 
+}
+
+void player2_move(int &row2, int &col2){
+
+    srand(time(0));
+
+    row2 = rand() % 3;
+    col2 = rand() % 3;
+
+}
+
+void player_check(){
+
+    
 }
