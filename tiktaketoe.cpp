@@ -34,7 +34,7 @@ Array
 */
 
 void print_array(string arr[3][3], int row);
-void player1_move(int &row1, int &col1);
+void player1_move(int &row1, int &col1, bool check);
 void player2_move(int &row2, int &col2);
 string update_game();
 string player1();
@@ -49,6 +49,7 @@ int main(){
     int row2 = 0;
     string choice = "x";
     bool winner = false;
+    bool check = player_check(array, row1, col1)
     string array[3][3] = {
         {"-","-","-"},
         {"-","-","-"},
@@ -57,7 +58,7 @@ int main(){
 
     print_array(array,3);
     while (winner == false) {  
-        player1_move(row1, col1);
+        player1_move(row1, col1, check);
         array[row1][col1] = choice; 
         is_winner1(array, 3, winner); 
         is_winner2(array,3,winner);
@@ -132,7 +133,7 @@ string player1(){
     return choice;
 }
 
-void player1_move(int &row, int &col){
+void player1_move(int &row, int &col, bool check){
     
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
