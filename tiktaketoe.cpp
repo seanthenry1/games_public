@@ -40,7 +40,7 @@ string update_game();
 string player1();
 void is_winner1(string arr[3][3], int row, bool &winner);
 void is_winner2(string arr[3][3], int row, bool &winner);
-bool player_check(string arr[3][3], int row);
+bool player_check(string arr[3][3], int row, int col);
 
 int main(){
     int row1 = 0;
@@ -57,12 +57,11 @@ int main(){
 
     print_array(array,3);
     while (winner == false) {  
-    player1_move(row1, col1);
-    player_check(array, 3);
-    array[row1][col1] = choice; 
-    is_winner1(array, 3, winner); 
-    is_winner2(array,3,winner);
-    print_array(array,3);
+        player1_move(row1, col1);
+        array[row1][col1] = choice; 
+        is_winner1(array, 3, winner); 
+        is_winner2(array,3,winner);
+        print_array(array,3);
     };
 
     return 0;
@@ -134,11 +133,11 @@ string player1(){
 }
 
 void player1_move(int &row, int &col){
-
+    
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
 
-    while (row != 0 && row != 1 && row !=2){
+    while (row != 0 && row != 1 && row != 2){
         cout << "Enter either a 0 or 2";
         cin >> row;
     }
@@ -160,11 +159,7 @@ void player2_move(int &row2, int &col2){
     col2 = rand() % 3;
 }
 
-bool player_check(string array[3][3], int row){
-    /*
-        scan the grid. If either x or o is in the players selection, then it is true. If the selection is false then the player is put in that position.
-
-    */
+bool player_check(string array[3][3], int row, int col){
     bool position;
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
@@ -176,7 +171,6 @@ bool player_check(string array[3][3], int row){
             }
         }
     }
-
     return position;
 }
 
