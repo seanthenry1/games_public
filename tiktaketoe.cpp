@@ -153,6 +153,10 @@ void player1_move(int &row, int &col, bool check){
         cout << "Enter either 0, 1, or 2 ";
         cin >> col;
     }
+
+    if (check == true){
+    
+    }      
 }
 
 
@@ -167,10 +171,10 @@ bool player_check(string array[3][3], int row, int col){
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
             if (arr[i][j]) == "x" && arr[i][j] == "o"){
-                position = true;
+                position = false;
             }
              else{
-                 position = false;
+                 position = true;
             }
         }
     }
