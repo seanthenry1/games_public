@@ -155,12 +155,9 @@ void player1_move(int &row, int &col){
 }
 
 void player2_move(int &row2, int &col2){
-
     srand(time(0));
-
     row2 = rand() % 3;
     col2 = rand() % 3;
-
 }
 
 bool player_check(string array[3][3], int row){
@@ -168,6 +165,18 @@ bool player_check(string array[3][3], int row){
         scan the grid. If either x or o is in the players selection, then it is true. If the selection is false then the player is put in that position.
 
     */
-    
+    bool position;
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++){
+            if (arr[i][j]) == "x" && arr[i][j] == "o"){
+                position = true;
+            }
+             else{
+                 position = false;
+            }
+        }
+    }
+
+    return position;
 }
 
