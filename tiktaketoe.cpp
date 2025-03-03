@@ -142,22 +142,19 @@ void player1_move(int &row, int &col, bool check){
     */
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
-
     while (row != 0 && row != 1 && row != 2){
-        cout << "Enter either a 0 or 2";
+        cout << "Enter either 0, 1, or 2 ";
         cin >> row;
     }
-
     cout << endl;
     cout << "Choose a column 0 and 2: ";
     cin >> col;
-
     while (col != 0 && col != 1 && col !=2){
-        cout << "Enter either a 0 or 2";
+        cout << "Enter either 0, 1, or 2 ";
         cin >> col;
     }
-
 }
+
 
 void player2_move(int &row2, int &col2){
     srand(time(0));
