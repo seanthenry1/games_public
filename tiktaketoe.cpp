@@ -39,6 +39,8 @@ void player2_move(int &row2, int &col2);
 string update_game();
 string player1();
 void is_winner1(string arr[3][3], int row, bool &winner);
+void is_winner2(string arr[3][3], int row, bool &winner);
+bool player_check(string arr[3][3], int row);
 
 int main(){
     int row1 = 0;
@@ -56,8 +58,10 @@ int main(){
     print_array(array,3);
     while (winner == false) {  
     player1_move(row1, col1);
+    player_check(array, 3);
     array[row1][col1] = choice; 
     is_winner1(array, 3, winner); 
+    is_winner2(array,3,winner);
     print_array(array,3);
     };
 
@@ -159,7 +163,11 @@ void player2_move(int &row2, int &col2){
 
 }
 
-void player_check(){
+bool player_check(string array[3][3], int row){
+    /*
+        scan the grid. If either x or o is in the players selection, then it is true. If the selection is false then the player is put in that position.
 
+    */
     
 }
+
