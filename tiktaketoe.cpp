@@ -134,7 +134,12 @@ string player1(){
 }
 
 void player1_move(int &row, int &col, bool check){
-    
+    /*
+    1. A row and column are entered
+    2. at the end of the loop a check is made if there is an x or o in that place.
+    3. If there is an x or o, the player is prompted to select again. 
+    4. Do while loop?
+    */
     cout << "Choose a row between 0 and 2: ";
     cin >> row;
 
