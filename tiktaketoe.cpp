@@ -43,8 +43,8 @@ void is_winner1(string arr[3][3], int row, bool &winner);
 bool player_check(string arr[3][3], int row, int col);
 
 int main(){
-    int row = 0;
-    int col = 0;
+    int row;
+    int col;
     string choice1 = "x";
     string choice2 = "o";
     bool winner = false;
@@ -55,13 +55,13 @@ int main(){
         {"-","-","-"}        
        };
     print_array(array,3);
-    while (winner == false) {  
+    while (winner == false) {   
         player1_move(array, row, col);
         array[row][col] = choice1; 
-        //is_winner1(array, 3, winner); 
+        is_winner1(array, 3, winner); 
         player2_move(array, row, col);
-        array[row2][col2] = choice2;
-        //is_winner2(array,3,winner);
+        array[row][col] = choice2;
+        is_winner2(array,3,winner);
         print_array(array,3);
     };
 
@@ -161,16 +161,18 @@ void player1_move(string array[3][3], int &row, int &col){
         if (check == false){
         cout << "Invalid move";
         }
-    }
+   }
 }
 
-void player2_move(string array[3][3], int &row2, int &col2){
+void player2_move(string array[3][3], int &row int &col){
     srand(time(0));
     bool check = false;
-    while (check = false){
-    row2 = rand() % 3;
-    col2 = rand() % 3;
-    check = player_check(array, row2, col2);
+    while (check == false){
+        row2 = rand() % 3;
+        col2 = rand() % 3;
+        cout << row << endl;
+        cout << col << endl;
+        check = player_check(array, row, col);
     }
 }
 
