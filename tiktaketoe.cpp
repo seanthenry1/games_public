@@ -39,29 +39,29 @@ void player2_move(int &row2, int &col2);
 string update_game();
 string player1();
 void is_winner1(string arr[3][3], int row, bool &winner);
-void is_winner2(string arr[3][3], int row, bool &winner);
+//void is_winner2(string arr[3][3], int row, bool &winner);
 bool player_check(string arr[3][3], int row, int col);
 
 int main(){
     int row1 = 0;
     int col1 = 0;
     int row2 = 0;
-    int row2 = 0;
+    int col2 = 0;
     string choice = "x";
     bool winner = false;
-    bool check = player_check(array, row1, col1)
+    
     string array[3][3] = {
         {"-","-","-"},
         {"-","-","-"},
         {"-","-","-"}        
        };
-
+    bool check = player_check(array, row1, col1);
     print_array(array,3);
     while (winner == false) {  
         player1_move(row1, col1, check);
         array[row1][col1] = choice; 
         is_winner1(array, 3, winner); 
-        is_winner2(array,3,winner);
+        //is_winner2(array,3,winner);
         print_array(array,3);
     };
 
@@ -170,7 +170,7 @@ bool player_check(string array[3][3], int row, int col){
     bool position;
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3; j++){
-            if (arr[i][j]) == "x" && arr[i][j] == "o"){
+            if (array[i][j] == "x" && array[i][j] == "o"){
                 position = false;
             }
              else{
