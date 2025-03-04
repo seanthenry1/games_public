@@ -34,8 +34,8 @@ Array
 */
 
 void print_array(string arr[3][3], int row);
-void player1_move(int &row1, int &col1, bool check);
-void player2_move(int &row2, int &col2);
+void player1_move(string arr[3][3], int &row, int &col);
+void player2_move(string arr[3][3], int &row, int &col);
 string update_game();
 string player1();
 void is_winner1(string arr[3][3], int row, bool &winner);
@@ -43,11 +43,10 @@ void is_winner1(string arr[3][3], int row, bool &winner);
 bool player_check(string arr[3][3], int row, int col);
 
 int main(){
-    int row1 = 0;
-    int col1 = 0;
-    int row2 = 0;
-    int col2 = 0;
-    string choice = "x";
+    int row = 0;
+    int col = 0;
+    string choice1 = "x";
+    string choice2 = "o";
     bool winner = false;
     
     string array[3][3] = {
@@ -55,12 +54,13 @@ int main(){
         {"-","-","-"},
         {"-","-","-"}        
        };
-    bool check = player_check(array, row1, col1);
     print_array(array,3);
     while (winner == false) {  
-        player1_move(row1, col1, check);
-        array[row1][col1] = choice; 
-        is_winner1(array, 3, winner); 
+        player1_move(array, row, col);
+        array[row][col] = choice1; 
+        //is_winner1(array, 3, winner); 
+        player2_move(array, row, col);
+        array[row2][col2] = choice2;
         //is_winner2(array,3,winner);
         print_array(array,3);
     };
@@ -74,6 +74,7 @@ void is_winner1(string arr[3][3], int row, bool &winner){
             if (arr[0][0] == "x" && arr[0][1] == "x" && arr[0][2] == "x"){  //handles row
                 winner = true;
                 cout << "Player 1 Wins!\n"; 
+            
             }
             else if (arr[1][0] == "x" && arr[1][1] == "x" && arr[1][2] == "x"){ //handles row
                 winner = true;
@@ -133,51 +134,54 @@ string player1(){
     return choice;
 }
 
-void player1_move(int &row, int &col, bool check){
+void player1_move(string array[3][3], int &row, int &col){
     /*
     1. A row and column are entered
     2. at the end of the loop a check is made if there is an x or o in that place.
-    3. If there is an x or o, the player is prompted to select again. 
+    3. If there is an x or o, the player is prompted to select again.  
     4. Do while loop?
     */
-    cout << "Choose a row between 0 and 2: ";
-    cin >> row;
-    while (row != 0 && row != 1 && row != 2){
+    bool check = false;
+
+    while (check == false){
+        cout << "Choose a row between 0 and 2: ";
+        cin >> row;
+        while (row != 0 && row != 1 && row != 2){
         cout << "Enter either 0, 1, or 2 ";
         cin >> row;
-    }
-    cout << endl;
-    cout << "Choose a column 0 and 2: ";
-    cin >> col;
-    while (col != 0 && col != 1 && col !=2){
+        }
+        cout << endl;
+        cout << "Choose a column 0 and 2: ";
+        cin >> col;
+        while (col != 0 && col != 1 && col !=2){
         cout << "Enter either 0, 1, or 2 ";
         cin >> col;
+        }
+        check = player_check(array, row, col);
+        if (check == false){
+        cout << "Invalid move";
+        }
     }
-
-    if (check == true){
-    
-    }      
 }
 
-
-void player2_move(int &row2, int &col2){
+void player2_move(string array[3][3], int &row2, int &col2){
     srand(time(0));
+    bool check = false;
+    while (check = false){
     row2 = rand() % 3;
     col2 = rand() % 3;
+    check = player_check(array, row2, col2);
+    }
 }
 
 bool player_check(string array[3][3], int row, int col){
     bool position;
-    for (int i = 0; i < 3; i++){
-        for (int j = 0; j < 3; j++){
-            if (array[i][j] == "x" && array[i][j] == "o"){
+            if (array[row][col] == "x" || array[row][col] == "o"){
                 position = false;
             }
              else{
                  position = true;
             }
-        }
-    }
     return position;
 }
 
