@@ -38,7 +38,7 @@ void player1_move(string arr[3][3], int &row, int &col);
 void player2_move(string arr[3][3], int &row, int &col);
 string update_game();
 string player1();
-void is_winner1(string arr[3][3], int row, bool &winner);
+void is_winner1(string array[3][3], int row, bool &winner);
 //void is_winner2(string arr[3][3], int row, bool &winner);
 bool player_check(string arr[3][3], int row, int col);
 
@@ -58,18 +58,62 @@ int main(){
     while (winner == false) {   
         player1_move(array, row, col);
         array[row][col] = choice1; 
-        is_winner1(array, 3, winner); 
+       
+        cout << endl;
+        
         player2_move(array, row, col);
         array[row][col] = choice2;
-        is_winner2(array,3,winner);
+        
+       // is_winner2(array,3,winner);
         print_array(array,3);
+        is_winner1(array, 3, winner);
+        cout << winner << " is   "; 
     };
 
     return 0;
 }
 
-void is_winner1(string arr[3][3], int row, bool &winner){
-   
+void is_winner1(string array[3][3], int row, bool &winner){
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3-2; j++){
+            if (array[i][j] == array[i][j+1] && array[i][j] == array[i][j+2]){
+                winner == true;
+            }
+        }
+    }
+    
+    
+    for (int i = 0; i < 1; i++){
+        for (int j = 0; j < 3; j++){
+            if (array[i][j] == array[i+1][j] && array[i][j] == array[i+2][j]){
+                winner == true;
+            }
+        }
+    }
+
+  
+
+    for (int i = 0; i < 2; i++){
+        for (int j = 0; j < 2; j++){
+            if ( array[i][j] == array[i+1][j+1] && array[i][j] == array[i+2][j+2] ){
+                winner == true;
+            }
+        }    
+    }
+
+
+        for (int i = 2; i >= 2; i--){
+            for (int j = 0; j < 1; j++){
+                if ( array[i][j] == array[i-1][j+1] && array[i][j] == array[i-2][j+2] ){
+                    winner == true;
+                }
+            }    
+        }
+
+    if (winner == true){
+        cout << "winner................";
+    }
+           
 }
 
 void print_array(string arr[3][3], int row){   
@@ -125,15 +169,15 @@ void player1_move(string array[3][3], int &row, int &col){
    }
 }
 
-void player2_move(string array[3][3], int &row int &col){
+void player2_move(string array[3][3], int &row2, int &col2){
     srand(time(0));
     bool check = false;
     while (check == false){
         row2 = rand() % 3;
         col2 = rand() % 3;
-        cout << row << endl;
-        cout << col << endl;
-        check = player_check(array, row, col);
+        cout << row2 << endl;
+        cout << col2 << endl;
+        check = player_check(array, row2, col2);
     }
 }
 
@@ -147,4 +191,3 @@ bool player_check(string array[3][3], int row, int col){
             }
     return position;
 }
-
