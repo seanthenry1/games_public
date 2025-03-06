@@ -69,46 +69,7 @@ int main(){
 }
 
 void is_winner1(string arr[3][3], int row, bool &winner){
-    for(int i=0; i<3; i++){
-        for (int j=0; j<3; j++){
-            if (arr[0][0] == "x" && arr[0][1] == "x" && arr[0][2] == "x"){  //handles row
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            
-            }
-            else if (arr[1][0] == "x" && arr[1][1] == "x" && arr[1][2] == "x"){ //handles row
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[2][0] == "x" && arr[2][1] == "x" && arr[2][2] == "x"){  //handles row
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[0][0] == "x" && arr[1][0] == "x" && arr[2][0] == "x"){  //handles col
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[0][1] == "x" && arr[1][1] == "x" && arr[2][1] == "x"){ //handles col
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[0][2] == "x" && arr[1][2] == "x" && arr[2][2] == "x"){ //handles col
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[0][0] == "x" && arr[1][1] == "x" && arr[2][2] == "x"){ //handles vert
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else if (arr[0][2] == "x" && arr[1][1] == "x" && arr[2][0] == "x"){ //handles vert
-                winner = true;
-                cout << "Player 1 Wins!\n"; 
-            }
-            else{
-                winner = false;
-            }
-        }      
-    }   
+   
 }
 
 void print_array(string arr[3][3], int row){   
