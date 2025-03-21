@@ -33,121 +33,168 @@ Array
 
 */
 
-void print_array(string arr[3][3], int row);
-void player1_move(string arr[3][3], int &row, int &col);
-void player2_move(string arr[3][3], int &row, int &col);
-string update_game();
-string player1();
-void is_winner1(string array[3][3], int row, bool &winner);
-//void is_winner2(string arr[3][3], int row, bool &winner);
-bool player_check(string arr[3][3], int row, int col);
+void print_array(char arr[3][3], int row);
+void player1_move(char arr[3][3], int &row, int &col);
+void player2_move(char arr[3][3], int &row, int &col);
+char update_game();
+char player_choice();
+char computer_choice(char choice1);
+void is_winner(char array[3][3], int row, bool &winner);
+void is_tie(char array[3][3], int row, bool &tie, bool winner);
+bool player_check(char arr[3][3], int row, int col);
 
 int main(){
-    int row;
-    int col;
-    string choice1 = "x";
-    string choice2 = "o";
+    int row = 0;
+    int col = 0;
+    char choice1;
+    char choice2;
     bool winner = false;
-    
-    string array[3][3] = {
-        {"-","-","-"},
-        {"-","-","-"},
-        {"-","-","-"}        
-       };
+    bool tie = false;
+    char array[3][3] = {
+        {'-','-','-'},
+        {'-','-','-'},
+        {'-','-','-'}
+    };
+    choice1 = player_choice();
+    choice2 = computer_choice(choice1);
     print_array(array,3);
-    while (winner == false) {   
-        player1_move(array, row, col);
-        array[row][col] = choice1; 
-       
-        cout << endl;
+ 
+    while (winner == false && tie == false) {
         
+        cout << "Tie: " << tie << endl;    
+        player1_move(array, row, col);
+        array[row][col] = choice1;
+        is_winner(array, 3, winner); 
+        is_tie(array, 3, tie, winner);
+        if (winner == true || tie == true){
+            break;
+        }
         player2_move(array, row, col);
         array[row][col] = choice2;
-        
-       // is_winner2(array,3,winner);
+        is_winner(array, 3, winner); 
+        is_tie(array, 3, tie, winner);
+        if (winner == true || tie == true){
+            break;
+        }
         print_array(array,3);
-        is_winner1(array, 3, winner);
-        cout << winner << " is   "; 
     };
-
+        print_array(array,3);
     return 0;
 }
 
-void is_winner1(string array[3][3], int row, bool &winner){
+void is_winner(char array[3][3], int row, bool &winner){
     for (int i = 0; i < 3; i++){
         for (int j = 0; j < 3-2; j++){
-            if (array[i][j] == array[i][j+1] && array[i][j] == array[i][j+2]){
-                winner == true;
+            if (array[i][j] != '-'){
+                if (array[i][j] == array[i][j+1] && array[i][j] == array[i][j+2]){
+                    winner = true;
+                    cout << "row";
+                }           
             }
         }
     }
-    
     
     for (int i = 0; i < 1; i++){
         for (int j = 0; j < 3; j++){
-            if (array[i][j] == array[i+1][j] && array[i][j] == array[i+2][j]){
-                winner == true;
+            if (array[i][j] != '-'){    
+                if (array[i][j] == array[i+1][j] && array[i][j] == array[i+2][j]){
+                    winner = true;
+                    cout << "col";
+                }
             }
         }
     }
 
-  
-
     for (int i = 0; i < 2; i++){
         for (int j = 0; j < 2; j++){
-            if ( array[i][j] == array[i+1][j+1] && array[i][j] == array[i+2][j+2] ){
-                winner == true;
+            if (array[i][j] != '-'){   
+                if ( array[i][j] == array[i+1][j+1] && array[i][j] == array[i+2][j+2] ){
+                    winner = true;
+                    cout << "diag1";
+                }
             }
         }    
     }
 
-
         for (int i = 2; i >= 2; i--){
             for (int j = 0; j < 1; j++){
-                if ( array[i][j] == array[i-1][j+1] && array[i][j] == array[i-2][j+2] ){
-                    winner == true;
+                if (array[i][j] != '-'){   
+                    if ( array[i][j] == array[i-1][j+1] && array[i][j] == array[i-2][j+2] ){
+                        winner = true;
+                        cout << "daig2";
+                    }
                 }
             }    
         }
 
     if (winner == true){
-        cout << "winner................";
+        cout << "Winner!";
     }
            
 }
 
-void print_array(string arr[3][3], int row){   
-    for(int i=0; i<3; i++){
-        for (int j=0; j<3; j++){
-            cout << arr[i][j];
+void is_tie(char array[3][3], int row, bool &tie, bool winner){
+    tie = true;
+    for (int i = 0; i < 3; i++){
+        for(int j = 0; j < 3; j++){
+            if (array[i][j] == '-'){
+                tie = false;
+                return;
+            }
         }
-        cout << endl;
     }
+    if (tie == true && winner == false){
+        cout << "Tie!\n"; 
+    }        
 }
 
+void print_array(char arr[3][3], int row){  
+    for(int i=0; i<3; i++){
+       
+        for (int j=0; j<3; j++){
+            cout << arr[i][j];
+            if (j<2){
+                cout << "|";
+            }   
+        }
+        if (i<2){
+            cout << endl <<"-----";
+        }
+        cout << endl;
+    }  
+}
 
-string player1(){
-    string choice;
-    cout << "Choose either x or o ";
+char player_choice(){
+    char choice;
+    cout << "Choose either x or o:  ";
     cin >> choice;
-    
-    while (choice != "x" && choice != "o"){
+    tolower(choice);
+    while (choice != 'x' && choice != 'o'){
         cout << "Enter either x or o: ";
         cin >> choice;
-    }
-    
+    }   
     return choice;
 }
 
-void player1_move(string array[3][3], int &row, int &col){
+char computer_choice(char choice1){
+    char computer;
+    if(choice1 == 'x'){
+        computer = 'o';
+    }
+    else{
+        computer = 'x';
+    }
+    return computer;
+}
+
+void player1_move(char array[3][3], int &row, int &col){
     /*
     1. A row and column are entered
     2. at the end of the loop a check is made if there is an x or o in that place.
     3. If there is an x or o, the player is prompted to select again.  
     4. Do while loop?
     */
-    bool check = false;
-
+    bool check;
     while (check == false){
         cout << "Choose a row between 0 and 2: ";
         cin >> row;
@@ -169,21 +216,22 @@ void player1_move(string array[3][3], int &row, int &col){
    }
 }
 
-void player2_move(string array[3][3], int &row2, int &col2){
+void player2_move(char array[3][3], int &row2, int &col2){
     srand(time(0));
     bool check = false;
+    
     while (check == false){
         row2 = rand() % 3;
         col2 = rand() % 3;
-        cout << row2 << endl;
-        cout << col2 << endl;
         check = player_check(array, row2, col2);
+        cout <<  "Check: " << check << endl;
     }
+        
 }
 
-bool player_check(string array[3][3], int row, int col){
+bool player_check(char array[3][3], int row, int col){
     bool position;
-            if (array[row][col] == "x" || array[row][col] == "o"){
+            if (array[row][col] == 'x' || array[row][col] == 'o'){
                 position = false;
             }
              else{
